@@ -1,3 +1,8 @@
-git remote add origin https://github.com/robsaidov/EmoSense.git
+#import modules
 
-git push -u origin main
+import tensorflow as tf
+import matplotlib.pyplot as plt
+import numpy as np
+import cv2 as cv
+from tensorflow.keras import layers, models
+

@@ -26,3 +26,4 @@ train_datagen = ImageDataGenerator(rescale=1./255, rotation_range=20, zoom_range
 
 # Same for test data (only rescaling)
 test_datagen = ImageDataGenerator(rescale=1./255)
+

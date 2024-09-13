@@ -21,5 +21,8 @@ test_dir = "C:\\Users\\user\\PycharmProjects\\EmoSense\\fer2013\\test"
 IMG_SIZE = (48, 48)
 BATCH_SIZE  = 64
 
-# Create ImageDataGenerator, basically for normalization
+# Creating ImageDataGenerator, basically for normalization
 train_datagen = ImageDataGenerator(rescale=1./255, rotation_range=20, zoom_range=0.2, horizontal_flip=True, shear_range=0.2)
+
+# Same for test data (only rescaling)
+test_datagen = ImageDataGenerator(rescale=1./255)

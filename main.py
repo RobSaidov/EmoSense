@@ -1,6 +1,6 @@
 #Importing modules
 
-import tesorflow as tf
+import tensorflow as tf
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -33,3 +33,35 @@ train_generator = train_datagen.flow_from_directory(train_dir, target_size=IMG_S
 
 # Loading the testing data from dir
 test_generator = test_datagen.flow_from_directory(test_dir, target_size=IMG_SIZE, batch_size=BATCH_SIZE, color_mode="grayscale", class_mode="categorical")
+
+
+#Building the model - CNN
+
+model = models.Sequential()
+
+#first layer
+model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(48, 48, 1)))
+model.add(layers.MaxPooling2D((2, 2)))
+
+# Second layer
+model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+
+# third layer
+model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+
+# flatten the output
+model.add(layers.Flatten())
+
+#connected layer
+model.add(layers.Dense(128, activation='relu'))
+
+# output layer, 7 means 7 emotions
+model.add(layers.Dense(7, activation='softmax'))
+
+#Ccompile the model
+model.compile(optimizer ="adam", loss = "categorical_crossentropy", metrics = ['accuracy'])
+
+#print the model summary
+model.summary()

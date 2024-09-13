@@ -27,3 +27,9 @@ train_datagen = ImageDataGenerator(rescale=1./255, rotation_range=20, zoom_range
 # Same for test data (only rescaling)
 test_datagen = ImageDataGenerator(rescale=1./255)
 
+# Loading the training data from directories
+
+train_generator = train_datagen.flow_from_directory(train_dir, target_size=IMG_SIZE, batch_size=BATCH_SIZE, color_mode="grayscale", class_mode="categorical")
+
+# Loading the testing data from dir
+test_generator = test_datagen.flow_from_directory(test_dir, target_size=IMG_SIZE, batch_size=BATCH_SIZE, color_mode="grayscale", class_mode="categorical")

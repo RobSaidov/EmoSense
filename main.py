@@ -10,6 +10,8 @@ from tensorflow.keras import layers, models
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
+#additional imports for model accuracy improvements
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 
 #Setting the directory for the data
@@ -41,15 +43,24 @@ test_generator = test_datagen.flow_from_directory(test_dir, target_size=IMG_SIZE
 #
 # #first layer
 # model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(48, 48, 1)))
+#
+# #adding batch normalization to accelerate the training
+# model.add(layers.BatchNormalization())
 # model.add(layers.MaxPooling2D((2, 2)))
+# #added the droupout layers to prevent overfitting
+# model.add(layers.Dropout(0.3))
 #
 # # Second layer
 # model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+# model.add(layers.BatchNormalization())
 # model.add(layers.MaxPooling2D((2, 2)))
+# model.add(layers.Dropout(0.3))
 #
 # # third layer
 # model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+# model.add(layers.BatchNormalization())
 # model.add(layers.MaxPooling2D((2, 2)))
+# model.add(layers.Dropout(0.3))
 #
 # # flatten the output
 # model.add(layers.Flatten())
@@ -66,15 +77,26 @@ test_generator = test_datagen.flow_from_directory(test_dir, target_size=IMG_SIZE
 # #print the model summary
 # model.summary()
 #
-# #training the model and validate it:
 #
-# history = model.fit(train_generator, epochs = 100, validation_data = test_generator)
+#
+# #training the model and validate it:
+# history = model.fit(train_generator, epochs = 25, validation_data = test_generator)
 #
 # # Savign the model\
-# model.save('EmoSense.keras')
+# model.save('EmoSense2_0.keras')
+
+
+
+
+
+
+
+
+
+
 
 #loading the model
-model = keras.models.load_model('EmoSense.keras')
+model = keras.models.load_model('EmoSense2_0.keras')
 
 # evaluating the model on test data
 loss, accuracy = model.evaluate(test_generator)

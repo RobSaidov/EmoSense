@@ -1,4 +1,4 @@
-## EmoSense: AI-Powered Emotion Recognition System
+# EmoSense: AI-Powered Emotion Recognition System
 
 EmoSense is an advanced AI system designed to classify human emotions from facial expressions in real-time using deep learning. Built with Convolutional Neural Networks (CNNs) and trained on the FER-2013 dataset, EmoSense is capable of identifying **seven distinct emotions**: Angry, Disgust, Fear, Happy, Sad, Surprise, and Neutral, making it perfect for applications in human-computer interaction, mental health assessments, and user experience optimization.
 
@@ -59,3 +59,70 @@ Follow these instructions to get a copy of EmoSense running on your local machin
    ```bash
    git clone https://github.com/robsaidov/EmoSense.git
    cd EmoSense
+   
+2. Set up a Virtual Environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+
+3. Install Dependencies: Create a requirements.txt file in the project root with the following content:
+   -tensorflow
+   -pandas
+   -numpy
+   -matplotlib
+   -opencv-python
+
+   Then run:
+   ```bash
+   pip install -r requirements.txt
+
+5. Download the FER-2013 Dataset:
+
+   -Download the Dataset: You can find the FER-2013 dataset on Kaggle.
+   -Place the Dataset: Extract the dataset and place the training and testing folders in the fer2013 directory within the project.
+
+## Usage
+
+  Training the Model
+
+    Prepare your Data: Ensure your dataset is organized into train and test directories as described.
+    Run the Training Script:
+        Modify the paths in main.py to point to your dataset directories.
+        Execute the script:
+
+        ```bash
+
+        python main.py
+
+Using the Model for Prediction
+
+    Load the Model: Use the trained model to make predictions.
+    Run the Prediction Script:
+        Modify the img_path variable in main.py to point to your test image.
+        Execute the script to see the emotion prediction.
+
+Results & Performance
+
+The model's performance is evaluated based on its accuracy and loss metrics on the test dataset. The script will print the validation loss and accuracy after evaluation.
+Future Improvements
+
+    Expand Emotion Categories: Include more emotion categories to enhance the model’s robustness.
+    Real-Time Video Processing: Integrate with real-time video streams for live emotion detection.
+    Fine-Tuning: Explore more advanced architectures and hyperparameter tuning for improved accuracy.
+    Deployment: Develop a web or mobile application for easier accessibility of the emotion recognition system.
+
+Contributing
+
+We welcome contributions to EmoSense! If you’d like to contribute, please follow these guidelines:
+
+    Fork the Repository: Create a personal copy of the repository.
+    Create a Branch: Work on a feature or fix in a separate branch.
+    Submit a Pull Request: Propose your changes and describe them in detail.
+
+Please ensure that your code adheres to our coding standards and includes relevant tests.
+License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+  
+

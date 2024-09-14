@@ -1,105 +1,61 @@
-EmoSense: Real-Time Emotion Recognition using CNN
+## EmoSense: AI-Powered Emotion Recognition System
 
-EmoSense is a cutting-edge emotion recognition system powered by a convolutional neural network (CNN). By leveraging deep learning techniques and real-time image processing, the system can detect and classify seven human emotions: Angry, Disgust, Fear, Happy, Sad, Surprise, and Neutral. This project showcases an implementation of facial emotion recognition using the FER-2013 dataset.
-Key Features
+EmoSense is an advanced AI system designed to classify human emotions from facial expressions in real-time using deep learning. Built with Convolutional Neural Networks (CNNs) and trained on the FER-2013 dataset, EmoSense is capable of identifying **seven distinct emotions**: Angry, Disgust, Fear, Happy, Sad, Surprise, and Neutral, making it perfect for applications in human-computer interaction, mental health assessments, and user experience optimization.
 
-    Real-Time Emotion Detection: EmoSense processes images in real-time to identify the emotion expressed on a human face.
-    CNN-Based Architecture: Built using TensorFlow and Keras, the model is optimized for accuracy and performance.
-    Data Augmentation: Training images are dynamically augmented (rotation, zoom, flip, shear) to prevent overfitting and enhance generalization.
-    Batch Normalization & Dropout: These techniques ensure the model remains robust and effective, accelerating training while minimizing overfitting.
-    Support for 7 Emotions: Detects a comprehensive range of emotions, allowing for nuanced recognition.
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [Model Architecture](#model-architecture)
+4. [Dataset](#dataset)
+5. [Getting Started](#getting-started)
+6. [Usage](#usage)
+7. [Results & Performance](#results-performance)
+8. [Contributing](#contributing)
 
-Project Structure
+## Project Overview
+The goal of EmoSense is to bridge the gap between artificial intelligence and human emotional intelligence. By leveraging the power of deep learning, we enable machines to read and understand facial expressions with remarkable accuracy. Whether you're building emotionally aware AI or need emotion tracking in real-time, EmoSense has you covered. 
 
-    Data: We utilize the FER-2013 dataset for training and testing, which consists of grayscale images of facial expressions. The dataset is split into a training set and a testing set for model evaluation.
-    Model: The CNN is built with three convolutional layers followed by batch normalization, max pooling, and dropout layers to ensure robust training. The final layer is a dense softmax classifier that outputs probabilities for the seven emotion categories.
-    Image Processing: Real-time image preprocessing is performed with OpenCV to handle facial detection and alignment, preparing the data for emotion prediction.
+This project employs **TensorFlow/Keras** and **OpenCV**, using a CNN that has been fine-tuned with advanced techniques like **Batch Normalization**, **Dropout**, and **Data Augmentation** to prevent overfitting and increase the generalizability of the model.
 
-Installation
+## Features
+- **Real-Time Emotion Detection**: Analyze video frames or images in real-time to classify emotions.
+- **Seven Emotion Categories**: Detects emotions such as **Angry, Disgust, Fear, Happy, Sad, Surprise,** and **Neutral**.
+- **Optimized CNN Model**: Efficient architecture with dropout layers and batch normalization for improved performance.
+- **Data Augmentation**: Uses rotation, zoom, and flipping for training to enhance model robustness.
+- **Pre-Trained Model**: Load an already trained model and start predicting emotions immediately.
 
-To install the required libraries, run the following command:
+## Model Architecture
+The EmoSense model is a deep CNN that processes 48x48 pixel grayscale images. The architecture has been optimized for emotion detection:
 
-bash
+- **Input Layer**: 48x48 grayscale facial image.
+- **Convolutional Layers**: Three convolutional layers with ReLU activations for feature extraction.
+  - Layer 1: 32 filters, Batch Normalization, MaxPooling, Dropout
+  - Layer 2: 64 filters, Batch Normalization, MaxPooling, Dropout
+  - Layer 3: 128 filters, Batch Normalization, MaxPooling, Dropout
+- **Fully Connected Layer**: A dense layer with 128 units followed by dropout.
+- **Output Layer**: Softmax classifier for 7 emotion categories.
 
-pip install -r requirements.txt
+This architecture balances complexity and computational efficiency, ensuring fast real-time predictions while maintaining high accuracy.
 
-Dataset
+## Dataset
+We use the **FER-2013 dataset**, which contains over 35,000 labeled grayscale images of faces, each categorized into one of seven emotional expressions. The images are 48x48 pixels in size, making them ideal for fast processing through the CNN.
 
-We use the FER-2013 dataset. If not included, you can download it from Kaggle FER-2013. Make sure to place the dataset in the appropriate train and test directories.
+- **Training Data**: ~28,000 images
+- **Testing Data**: ~7,000 images
 
-bash
+The dataset is preprocessed with normalization (rescaling pixel values to [0, 1]) and augmented to avoid overfitting by applying transformations such as rotations, zoom, and flips.
 
-train_dir = "path_to_train_directory"
-test_dir = "path_to_test_directory"
+## Getting Started
+Follow these instructions to get a copy of EmoSense running on your local machine:
 
-Model Architecture
+### Prerequisites
+- Python 3.x
+- TensorFlow/Keras
+- OpenCV
+- Pandas, NumPy, Matplotlib
 
-python
-
-# CNN Architecture
-model = models.Sequential()
-
-# Layer 1
-model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(48, 48, 1)))
-model.add(layers.BatchNormalization())
-model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Dropout(0.3))
-
-# Layer 2
-model.add(layers.Conv2D(64, (3, 3), activation='relu'))
-model.add(layers.BatchNormalization())
-model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Dropout(0.3))
-
-# Layer 3
-model.add(layers.Conv2D(128, (3, 3), activation='relu'))
-model.add(layers.BatchNormalization())
-model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Dropout(0.3))
-
-# Flatten and Dense Layer
-model.add(layers.Flatten())
-model.add(layers.Dense(128, activation='relu'))
-model.add(layers.Dense(7, activation='softmax'))
-
-The model is trained using Adam optimizer and categorical cross-entropy loss, with accuracy metrics.
-Usage
-Training the Model
-
-To train the model, simply run:
-
-python
-
-history = model.fit(train_generator, epochs=25, validation_data=test_generator)
-
-Saving the Model
-
-The trained model is saved using:
-
-python
-
-model.save('EmoSense2_0.keras')
-
-Real-Time Emotion Detection
-
-To perform real-time emotion detection, load an image and predict the emotion:
-
-python
-
-img_path = 'path_to_image'
-img = image.load_img(img_path, target_size=IMG_SIZE, color_mode="grayscale")
-predictions = model.predict(img_array)
-
-Results
-
-After training, the model achieves X% validation accuracy with a loss of Y. The model performs particularly well on emotions such as Happy and Neutral, though subtle expressions like Disgust may require further refinement.
-Future Work
-
-    Implementing live webcam integration for real-time emotion detection.
-    Improving accuracy on less frequent emotions like Disgust and Surprise.
-    Expanding the dataset with more diverse expressions and lighting conditions.
-    Exploring transfer learning for higher accuracy.
-
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/robsaidov/EmoSense.git
+   cd EmoSense

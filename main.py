@@ -65,3 +65,10 @@ model.compile(optimizer ="adam", loss = "categorical_crossentropy", metrics = ['
 
 #print the model summary
 model.summary()
+
+#training the model and validate it:
+
+history = model.fit(train_generator, epochs = 100, validation_data = test_generator)
+
+# Savign the model\
+model.save('EmoSense.keras')
